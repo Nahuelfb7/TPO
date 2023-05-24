@@ -1,0 +1,100 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Squash</title>
+
+</head>
+<body>
+    <ul class="navbar">
+        <li><a href="#" onclick="cargarContenido('inicio.html')">Inicio</a></li>
+        <li><a href="#" onclick="cargarContenido('historia.html')">Historia</a></li>
+        <li><a href="#" onclick="cargarContenido('mejores_jugadores.html')">Mejores Jugadores</a></li>
+        <li><a href="#" onclick="cargarContenido('principales_torneos.html')">Principales Torneos</a></li>
+        <li><a href="#" onclick="cargarContenido('fixture.html')">Próximos Partidos</a></li>
+        <li><a href="#" onclick="cargarContenido('donde_jugar.html')">Donde jugar</a></li>
+        <li><a href="#" onclick="cargarContenido('form.html')">Formulario</a></li>
+      </ul>
+      <div id="miContenido">
+        <!-- Aquí se mostrará el contenido dinámico -->
+      </div>
+      
+<script>
+    window.onload = function() {
+        cargarContenido('inicio.html');
+    };
+    function cargarContenido(url) {
+        fetch(url)
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(content) {
+            document.getElementById("miContenido").innerHTML = content;
+            if (url === 'fixture.html') {
+                hacerRequest();
+            }	
+
+        })
+        .catch(function(error) {
+            console.log('Error al cargar el contenido: ', error);
+        });
+    }
+    async function hacerRequest() {
+        const url = 'https://cricket-live-data.p.rapidapi.com/fixtures';
+        const options = {
+            method: 'GET',
+            headers: {
+                //Pedir contraseña
+        };
+        try {
+            const response = await fetch(url, options);
+            const result = await response.text();
+            const partidos = JSON.parse(result);
+            console.log(partidos.results);
+            const primerosCincoElementos = partidos.results.slice(0, 20);
+
+            // Obtener el contenedor de la lista
+            const contenedorPartidos = document.getElementById('partidos');
+            primerosCincoElementos.forEach(elemento => {
+            const parrafo = document.createElement('p');
+            parrafo.textContent = elemento.match_title + " el día " + elemento.date;;
+            contenedorPartidos.appendChild(parrafo);
+            });
+
+            
+        } catch (error) {
+            console.error(error);
+        }
+    }
+        function validateForm(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form input values
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+
+            // Email format validation using a regular expression
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address.");
+                return false; // Prevent form reset
+            }
+
+            // Perform further processing or submit the form
+            // ...
+
+            // Clear the form inputs
+            document.getElementById("myForm").reset();
+
+            // Display a success message
+            alert("Form submitted successfully!");
+        }
+
+</script>
+</body>
+</html>

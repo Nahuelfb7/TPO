@@ -1,0 +1,55 @@
+    /* CSS styles for the responsive navbar using flexbox */
+    ul.navbar {
+        display: flex;
+        justify-content: space-between;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+  
+      ul.navbar li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+  
+      ul.navbar li a:hover {
+        background-color: #111;
+      }
+  
+      /* Media query for responsive navbar */
+      @media screen and (max-width: 600px) {
+        ul.navbar {
+          flex-direction: column;
+        }
+  
+        ul.navbar li {
+          width: 100%;
+        }
+      }
+
+/* CSS para tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+img {
+    max-width: 100px;
+    height: auto;
+}
+
+#imageninicio {
+  max-width: 700px;
+  max-height: auto;
+}
