@@ -1,30 +1,4 @@
-<!-- index.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Squash</title>
-
-</head>
-<body>
-    <ul class="navbar">
-        <li><a href="#" onclick="cargarContenido('inicio.html')">Inicio</a></li>
-        <li><a href="#" onclick="cargarContenido('historia.html')">Historia</a></li>
-        <li><a href="#" onclick="cargarContenido('mejores_jugadores.html')">Mejores Jugadores</a></li>
-        <li><a href="#" onclick="cargarContenido('principales_torneos.html')">Principales Torneos</a></li>
-        <li><a href="#" onclick="cargarContenido('fixture.html')">Próximos Partidos</a></li>
-        <li><a href="#" onclick="cargarContenido('donde_jugar.html')">Donde jugar</a></li>
-        <li><a href="#" onclick="cargarContenido('form.html')">Formulario</a></li>
-      </ul>
-      <div id="miContenido">
-        <!-- Aquí se mostrará el contenido dinámico -->
-      </div>
-      
-<script>
-    window.onload = function() {
+window.onload = function() {
         cargarContenido('inicio.html');
     };
     function cargarContenido(url) {
@@ -48,7 +22,9 @@
         const options = {
             method: 'GET',
             headers: {
-                //Pedir contraseña
+                'X-RapidAPI-Key': 'f71e71e01cmshe87be353164325dp117ca6jsn0331ca586917',
+                'X-RapidAPI-Host': 'cricket-live-data.p.rapidapi.com'
+            }
         };
         try {
             const response = await fetch(url, options);
@@ -94,7 +70,3 @@
             // Display a success message
             alert("Form submitted successfully!");
         }
-
-</script>
-</body>
-</html>
